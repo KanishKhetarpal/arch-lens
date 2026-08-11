@@ -1,0 +1,82 @@
+# Progress
+
+Roadmap for arch-lens, tracked as small conventional-commit-sized steps.
+Checked items are done; the rest are up next, in order.
+
+## Phase 1 — Scaffold
+
+- [x] chore: initialize NestJS project (package.json, tsconfig.json, nest-cli.json, src/main.ts)
+- [x] chore: add ESLint, Prettier, .editorconfig, .gitignore
+- [x] docs: README with vision, feature list, architecture overview
+- [x] feat: AppModule + health controller
+- [x] feat(config): typed config module with env schema validation
+- [x] test: jest unit + e2e harness with one passing test
+
+## Phase 2 — Ingestion
+
+- [ ] feat(ingestion): RepoSource DTO + reader interfaces
+- [ ] feat(ingestion): local filesystem repo reader
+- [ ] feat(ingestion): git URL cloner (simple-git)
+- [ ] feat(ingestion): source-file enumerator with ignore rules
+- [ ] test(ingestion): enumerator unit tests with fixtures
+- [ ] docs: ingestion module notes
+
+## Phase 3 — Parser
+
+- [ ] feat(parser): ts-morph project loader
+- [ ] feat(parser): extract import/export declarations
+- [ ] feat(parser): extract classes, functions, Nest decorators
+- [ ] feat(parser): normalize into ModuleSymbol model
+- [ ] test(parser): parsing tests on sample fixtures
+- [ ] docs: parser module notes
+
+## Phase 4 — Dependency Graph
+
+- [ ] feat(graph): graph data structure (nodes/edges)
+- [ ] feat(graph): build edges from import relations
+- [ ] feat(graph): cycle detection (Tarjan SCC)
+- [ ] feat(graph): topological layering / grouping
+- [ ] feat(graph): metrics — fan-in/fan-out, coupling, instability
+- [ ] test(graph): graph + cycle tests
+
+## Phase 5 — Data Flow
+
+- [ ] feat(dataflow): DI injection graph from constructor params
+- [ ] feat(dataflow): trace controller -> service -> repository flows
+- [ ] feat(dataflow): annotate edges with data/DTO types
+- [ ] feat(dataflow): merge data-flow into dependency graph
+- [ ] test(dataflow): flow inference tests
+- [ ] docs: dataflow module notes
+
+## Phase 6 — Diagram
+
+- [ ] feat(diagram): graph -> Mermaid renderer
+- [ ] feat(diagram): graph -> D3 JSON exporter
+- [ ] feat(diagram): interactive HTML/SVG output (zoom, hover, highlight)
+- [ ] feat(diagram): theming + layout options
+- [ ] test(diagram): renderer snapshot tests
+- [ ] docs: diagram module notes
+
+## Phase 7 — Explanation
+
+- [ ] feat(explain): template-based per-module summaries
+- [ ] feat(explain): describe layers, entrypoints, boundaries
+- [ ] feat(explain): highlight cycles + coupling hotspots
+- [ ] feat(explain): LLM-ready prompt builder (pluggable provider)
+- [ ] test(explain): explanation tests
+- [ ] docs: explanation module notes
+
+## Phase 8 — API + CLI
+
+- [ ] feat(api): POST /analyze (repo path or git URL)
+- [ ] feat(api): GET /diagram/:id and GET /explanation/:id
+- [ ] feat(api): async job handling + status endpoint
+- [ ] feat(cli): arch-lens analyze <path> command
+- [ ] test(api): e2e tests
+- [ ] docs: usage examples + API reference in README
+
+## Phase 9+ — Polish
+
+Repeat/extend once Phase 8 is done: result caching, GitHub Action wrapper,
+sample gallery, docs site, multi-language parsing (Python/Go), Docker image,
+CI workflow, CONTRIBUTING + issue templates.
