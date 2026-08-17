@@ -14,12 +14,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 2 — Ingestion
 
-- [ ] feat(ingestion): RepoSource DTO + reader interfaces
-- [ ] feat(ingestion): local filesystem repo reader
-- [ ] feat(ingestion): git URL cloner (simple-git)
-- [ ] feat(ingestion): source-file enumerator with ignore rules
-- [ ] test(ingestion): enumerator unit tests with fixtures
-- [ ] docs: ingestion module notes
+- [x] feat(ingestion): RepoSource DTO + reader interfaces
+- [x] feat(ingestion): local filesystem repo reader
+- [x] feat(ingestion): git URL cloner (simple-git)
+- [x] feat(ingestion): source-file enumerator with ignore rules
+- [x] test(ingestion): enumerator unit tests with fixtures
+- [x] docs: ingestion module notes
 
 ## Phase 3 — Parser
 
