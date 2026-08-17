@@ -4,3 +4,10 @@ coverage/
 *.log
 .env
 .env.local
+
+# Ingestion test fixtures intentionally contain node_modules/ and dist/
+# directories to exercise the enumerator's default ignore rules.
+!src/ingestion/enumeration/__fixtures__/**/node_modules/
+!src/ingestion/enumeration/__fixtures__/**/node_modules/**
+!src/ingestion/enumeration/__fixtures__/**/dist/
+!src/ingestion/enumeration/__fixtures__/**/dist/**
