@@ -23,12 +23,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 3 — Parser
 
-- [ ] feat(parser): ts-morph project loader
-- [ ] feat(parser): extract import/export declarations
-- [ ] feat(parser): extract classes, functions, Nest decorators
-- [ ] feat(parser): normalize into ModuleSymbol model
-- [ ] test(parser): parsing tests on sample fixtures
-- [ ] docs: parser module notes
+- [x] feat(parser): ts-morph project loader
+- [x] feat(parser): extract import/export declarations
+- [x] feat(parser): extract classes, functions, Nest decorators
+- [x] feat(parser): normalize into ModuleSymbol model
+- [x] test(parser): parsing tests on sample fixtures
+- [x] docs: parser module notes
 
 ## Phase 4 — Dependency Graph
 
