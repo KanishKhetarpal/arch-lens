@@ -42,7 +42,11 @@ export class DependencyGraphBuilder {
           continue;
         }
         edgeKeys.add(edgeKey);
-        edges.push({ from: symbol.relativePath, to: resolved, specifier: importDecl.moduleSpecifier });
+        edges.push({
+          from: symbol.relativePath,
+          to: resolved,
+          specifier: importDecl.moduleSpecifier,
+        });
       }
     }
 

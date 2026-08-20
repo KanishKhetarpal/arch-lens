@@ -35,7 +35,9 @@ export class CycleDetector {
 
   /** Non-trivial components only: real cycles (mutual/indirect deps or self-imports). */
   findCycles(graph: DependencyGraph): StronglyConnectedComponent[] {
-    const selfLoops = new Set(graph.edges.filter((edge) => edge.from === edge.to).map((edge) => edge.from));
+    const selfLoops = new Set(
+      graph.edges.filter((edge) => edge.from === edge.to).map((edge) => edge.from),
+    );
 
     return this.findComponents(graph).filter(
       (component) => component.nodeIds.length > 1 || selfLoops.has(component.nodeIds[0]),
@@ -68,9 +70,15 @@ export class CycleDetector {
     for (const w of adjacency.get(v) ?? []) {
       if (!state.indices.has(w)) {
         this.strongConnect(w, adjacency, state, components);
-        state.lowlink.set(v, Math.min(state.lowlink.get(v) as number, state.lowlink.get(w) as number));
+        state.lowlink.set(
+          v,
+          Math.min(state.lowlink.get(v) as number, state.lowlink.get(w) as number),
+        );
       } else if (state.onStack.has(w)) {
-        state.lowlink.set(v, Math.min(state.lowlink.get(v) as number, state.indices.get(w) as number));
+        state.lowlink.set(
+          v,
+          Math.min(state.lowlink.get(v) as number, state.indices.get(w) as number),
+        );
       }
     }
 
