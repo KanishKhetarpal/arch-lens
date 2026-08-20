@@ -32,12 +32,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 4 — Dependency Graph
 
-- [ ] feat(graph): graph data structure (nodes/edges)
-- [ ] feat(graph): build edges from import relations
-- [ ] feat(graph): cycle detection (Tarjan SCC)
-- [ ] feat(graph): topological layering / grouping
-- [ ] feat(graph): metrics — fan-in/fan-out, coupling, instability
-- [ ] test(graph): graph + cycle tests
+- [x] feat(graph): graph data structure (nodes/edges)
+- [x] feat(graph): build edges from import relations
+- [x] feat(graph): cycle detection (Tarjan SCC)
+- [x] feat(graph): topological layering / grouping
+- [x] feat(graph): metrics — fan-in/fan-out, coupling, instability
+- [x] test(graph): graph + cycle tests
 
 ## Phase 5 — Data Flow
 
