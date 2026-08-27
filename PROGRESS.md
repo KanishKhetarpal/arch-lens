@@ -41,12 +41,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 5 — Data Flow
 
-- [ ] feat(dataflow): DI injection graph from constructor params
-- [ ] feat(dataflow): trace controller -> service -> repository flows
-- [ ] feat(dataflow): annotate edges with data/DTO types
-- [ ] feat(dataflow): merge data-flow into dependency graph
-- [ ] test(dataflow): flow inference tests
-- [ ] docs: dataflow module notes
+- [x] feat(dataflow): DI injection graph from constructor params
+- [x] feat(dataflow): trace controller -> service -> repository flows
+- [x] feat(dataflow): annotate edges with data/DTO types
+- [x] feat(dataflow): merge data-flow into dependency graph
+- [x] test(dataflow): flow inference tests
+- [x] docs: dataflow module notes
 
 ## Phase 6 — Diagram
 
