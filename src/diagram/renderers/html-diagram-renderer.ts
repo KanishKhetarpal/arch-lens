@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { LayeredLayout, NodePosition } from '../layout/layered-layout';
+import { DARK_THEME, DiagramTheme } from '../interfaces/diagram-theme.interface';
 import { DiagramModel } from '../interfaces/diagram-model.interface';
+import { LayoutOptions } from '../interfaces/layout-options.interface';
 
 const NODE_WIDTH = 160;
 const NODE_HEIGHT = 44;
@@ -15,13 +17,19 @@ interface NodeMetadata {
   instability: number;
 }
 
+export interface HtmlRenderOptions {
+  theme?: DiagramTheme;
+  layout?: LayoutOptions;
+}
+
 @Injectable()
 export class HtmlDiagramRenderer {
   constructor(private readonly layout: LayeredLayout) {}
 
   /** Renders a self-contained HTML document: inline SVG + vanilla-JS pan/zoom/hover/click highlighting. */
-  render(model: DiagramModel): string {
-    const positions = this.layout.compute(model);
+  render(model: DiagramModel, options: HtmlRenderOptions = {}): string {
+    const theme = options.theme ?? DARK_THEME;
+    const positions = this.layout.compute(model, options.layout);
     const positionById = new Map(positions.map((position) => [position.id, position]));
 
     const bounds = this.computeBounds(positions);
@@ -34,7 +42,7 @@ export class HtmlDiagramRenderer {
     const nodesMarkup = this.renderNodes(model, positionById, offsetX, offsetY);
     const metadata = this.buildMetadata(model);
 
-    return this.wrapDocument(width, height, nodesMarkup, edgesMarkup, metadata);
+    return this.wrapDocument(width, height, nodesMarkup, edgesMarkup, metadata, theme);
   }
 
   private computeBounds(positions: NodePosition[]): {
@@ -128,6 +136,7 @@ export class HtmlDiagramRenderer {
     nodesMarkup: string,
     edgesMarkup: string,
     metadata: Record<string, NodeMetadata>,
+    theme: DiagramTheme,
   ): string {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -135,7 +144,7 @@ export class HtmlDiagramRenderer {
 <meta charset="UTF-8">
 <title>arch-lens diagram</title>
 <style>
-${this.stylesheet()}
+${this.stylesheet(theme)}
 </style>
 </head>
 <body>
@@ -164,22 +173,22 @@ ${this.interactionScript()}
 `;
   }
 
-  private stylesheet(): string {
-    return `  html, body { margin: 0; height: 100%; font-family: sans-serif; background: #0f1115; color: #e6e6e6; }
+  private stylesheet(theme: DiagramTheme): string {
+    return `  html, body { margin: 0; height: 100%; font-family: sans-serif; background: ${theme.background}; color: ${theme.text}; }
   svg { width: 100%; height: 100%; cursor: grab; }
   svg:active { cursor: grabbing; }
-  marker path { fill: #4b5263; }
-  .node rect { fill: #1f2430; stroke: #4b5263; stroke-width: 1.5; }
-  .node text { fill: #e6e6e6; font-size: 12px; pointer-events: none; }
-  .node.cyclic rect { stroke: #e06c75; }
-  .edge { stroke: #4b5263; stroke-width: 1.5; }
-  .edge.cyclic { stroke: #e06c75; stroke-dasharray: 4 3; }
+  marker path { fill: ${theme.edgeStroke}; }
+  .node rect { fill: ${theme.nodeFill}; stroke: ${theme.nodeStroke}; stroke-width: 1.5; }
+  .node text { fill: ${theme.text}; font-size: 12px; pointer-events: none; }
+  .node.cyclic rect { stroke: ${theme.cyclicStroke}; }
+  .edge { stroke: ${theme.edgeStroke}; stroke-width: 1.5; }
+  .edge.cyclic { stroke: ${theme.cyclicStroke}; stroke-dasharray: 4 3; }
   .edge.dimmed, .node.dimmed { opacity: 0.15; }
-  .edge.active { stroke: #61afef; stroke-width: 2.5; }
-  .node.active rect { stroke: #61afef; stroke-width: 2.5; }
+  .edge.active { stroke: ${theme.activeStroke}; stroke-width: 2.5; }
+  .node.active rect { stroke: ${theme.activeStroke}; stroke-width: 2.5; }
   #tooltip {
-    position: fixed; pointer-events: none; background: #1f2430; color: #e6e6e6;
-    border: 1px solid #4b5263; border-radius: 4px; padding: 6px 10px; font-size: 12px;
+    position: fixed; pointer-events: none; background: ${theme.tooltipBackground}; color: ${theme.text};
+    border: 1px solid ${theme.nodeStroke}; border-radius: 4px; padding: 6px 10px; font-size: 12px;
     display: none; white-space: pre; z-index: 10;
   }`;
   }
