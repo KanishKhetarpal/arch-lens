@@ -8,7 +8,19 @@ import { MermaidRenderer } from './renderers/mermaid-renderer';
 
 @Module({
   imports: [GraphModule],
-  providers: [DiagramModelBuilder, MermaidRenderer, D3JsonExporter, LayeredLayout, HtmlDiagramRenderer],
-  exports: [DiagramModelBuilder, MermaidRenderer, D3JsonExporter, LayeredLayout, HtmlDiagramRenderer],
+  providers: [
+    DiagramModelBuilder,
+    MermaidRenderer,
+    D3JsonExporter,
+    LayeredLayout,
+    HtmlDiagramRenderer,
+  ],
+  exports: [
+    DiagramModelBuilder,
+    MermaidRenderer,
+    D3JsonExporter,
+    LayeredLayout,
+    HtmlDiagramRenderer,
+  ],
 })
 export class DiagramModule {}

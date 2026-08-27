@@ -164,7 +164,7 @@ ${this.stylesheet(theme)}
   </g>
 </svg>
 <div id="tooltip"></div>
-<script id="graph-metadata" type="application/json">${JSON.stringify(metadata)}</script>
+<script id="graph-metadata" type="application/json">${this.toScriptSafeJson(metadata)}</script>
 <script>
 ${this.interactionScript()}
 </script>
@@ -291,6 +291,11 @@ ${this.interactionScript()}
     });
   });
 })();`;
+  }
+
+  /** Node labels come from repo source (untrusted); escape `<` so nothing can break out of the script tag. */
+  private toScriptSafeJson(data: unknown): string {
+    return JSON.stringify(data).replace(/</g, '\\u003c');
   }
 
   private escapeAttr(value: string): string {

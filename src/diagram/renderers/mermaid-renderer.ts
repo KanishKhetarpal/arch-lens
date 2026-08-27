@@ -24,7 +24,9 @@ export class MermaidRenderer {
     groupByLayer: boolean,
   ): string[] {
     if (!groupByLayer) {
-      return model.nodes.map((node) => `  ${idFor.get(node.id)}["${this.escapeLabel(node.label)}"]`);
+      return model.nodes.map(
+        (node) => `  ${idFor.get(node.id)}["${this.escapeLabel(node.label)}"]`,
+      );
     }
 
     const nodesByDepth = new Map<number, DiagramNode[]>();
@@ -66,7 +68,10 @@ export class MermaidRenderer {
     if (cyclicIds.length === 0) {
       return [];
     }
-    return ['  classDef cycle fill:#f66,stroke:#900,color:#fff', `  class ${cyclicIds.join(',')} cycle`];
+    return [
+      '  classDef cycle fill:#f66,stroke:#900,color:#fff',
+      `  class ${cyclicIds.join(',')} cycle`,
+    ];
   }
 
   /** Mermaid node ids must be alphanumeric/underscore; node ids here are file paths. */
