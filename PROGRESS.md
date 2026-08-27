@@ -50,12 +50,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 6 — Diagram
 
-- [ ] feat(diagram): graph -> Mermaid renderer
-- [ ] feat(diagram): graph -> D3 JSON exporter
-- [ ] feat(diagram): interactive HTML/SVG output (zoom, hover, highlight)
-- [ ] feat(diagram): theming + layout options
-- [ ] test(diagram): renderer snapshot tests
-- [ ] docs: diagram module notes
+- [x] feat(diagram): graph -> Mermaid renderer
+- [x] feat(diagram): graph -> D3 JSON exporter
+- [x] feat(diagram): interactive HTML/SVG output (zoom, hover, highlight)
+- [x] feat(diagram): theming + layout options
+- [x] test(diagram): renderer snapshot tests
+- [x] docs: diagram module notes
 
 ## Phase 7 — Explanation
 
