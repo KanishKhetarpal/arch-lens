@@ -59,12 +59,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 7 — Explanation
 
-- [ ] feat(explain): template-based per-module summaries
-- [ ] feat(explain): describe layers, entrypoints, boundaries
-- [ ] feat(explain): highlight cycles + coupling hotspots
-- [ ] feat(explain): LLM-ready prompt builder (pluggable provider)
-- [ ] test(explain): explanation tests
-- [ ] docs: explanation module notes
+- [x] feat(explain): template-based per-module summaries
+- [x] feat(explain): describe layers, entrypoints, boundaries
+- [x] feat(explain): highlight cycles + coupling hotspots
+- [x] feat(explain): LLM-ready prompt builder (pluggable provider)
+- [x] test(explain): explanation tests
+- [x] docs: explanation module notes
 
 ## Phase 8 — API + CLI
 
