@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AnalysisJobService } from '../jobs/analysis-job.service';
 import { AnalysisJob, JobStatus } from '../jobs/interfaces/analysis-job.interface';
 import { RepoSourceDto } from '../ingestion/dto/repo-source.dto';
@@ -21,6 +21,11 @@ export class AnalyzeController {
     const source = this.parseSource(body);
     const job = this.jobs.create(source);
     return this.toStatusResponse(job);
+  }
+
+  @Get('analyze/:id')
+  status(@Param('id') id: string): JobStatusResponse {
+    return this.toStatusResponse(this.jobs.get(id));
   }
 
   private parseSource(body: RepoSourceDto) {
