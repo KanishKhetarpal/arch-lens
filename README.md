@@ -74,6 +74,70 @@ npm install
 npm run start:dev
 ```
 
+## API reference
+
+Analysis runs as a background job: `POST /analyze` kicks it off and returns a
+job id immediately; poll `GET /analyze/:id` for status, then fetch the
+diagram or explanation once it's `completed`.
+
+### `POST /analyze`
+
+Body is a repo source — either a local path or a git URL:
+
+```bash
+curl -X POST http://localhost:3000/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"type": "local", "path": "/path/to/repo"}'
+
+curl -X POST http://localhost:3000/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"type": "git", "url": "https://github.com/nestjs/nest", "ref": "master"}'
+```
+
+```json
+{ "id": "9d0a9416-...", "status": "pending", "createdAt": "2026-08-29T14:30:19.254Z" }
+```
+
+### `GET /analyze/:id`
+
+Returns the job's current status (`pending` | `running` | `completed` |
+`failed`), plus `completedAt` and `error` once it settles.
+
+### `GET /diagram/:id?format=mermaid|html|json`
+
+Only valid once the job is `completed` (409 otherwise). `format` defaults to
+`mermaid`:
+
+- `mermaid` — Mermaid `flowchart` source (`text/plain`), pastable into docs.
+- `html` — a self-contained interactive HTML/SVG page (`text/html`) with
+  pan/zoom/hover/click highlighting.
+- `json` — the D3-friendly `{ nodes, links }` export (`application/json`).
+
+### `GET /explanation/:id`
+
+Returns the full `Explanation` object once the job is `completed`: per-module
+summaries, the architecture overview, cycle/coupling hotspots, and an
+LLM-ready prompt built from all three.
+
+## CLI
+
+```bash
+npm run build
+node dist/cli/main-cli.js analyze <path-or-git-url> [--out <dir>] [--ref <branch>]
+# or, once installed as a package: arch-lens analyze <path-or-git-url>
+```
+
+Runs the same pipeline as the API, outside of a running server, and writes
+`diagram.mmd`, `diagram.html`, `diagram.json`, and `explanation.md` into
+`--out` (default `./arch-lens-out`). A target starting with `http(s)://` or
+`git@`, or ending in `.git`, is treated as a git URL; anything else is a
+local path.
+
+```bash
+node dist/cli/main-cli.js analyze ./my-repo --out ./my-repo-arch-lens
+node dist/cli/main-cli.js analyze https://github.com/nestjs/nest --ref master
+```
+
 ## Testing
 
 ```bash
