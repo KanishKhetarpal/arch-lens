@@ -68,12 +68,12 @@ Checked items are done; the rest are up next, in order.
 
 ## Phase 8 — API + CLI
 
-- [ ] feat(api): POST /analyze (repo path or git URL)
-- [ ] feat(api): GET /diagram/:id and GET /explanation/:id
-- [ ] feat(api): async job handling + status endpoint
-- [ ] feat(cli): arch-lens analyze <path> command
-- [ ] test(api): e2e tests
-- [ ] docs: usage examples + API reference in README
+- [x] feat(api): POST /analyze (repo path or git URL)
+- [x] feat(api): GET /diagram/:id and GET /explanation/:id
+- [x] feat(api): async job handling + status endpoint
+- [x] feat(cli): arch-lens analyze <path> command
+- [x] test(api): e2e tests
+- [x] docs: usage examples + API reference in README
 
 ## Phase 9+ — Polish
 
