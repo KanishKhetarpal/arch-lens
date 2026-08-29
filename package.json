@@ -5,6 +5,9 @@
   "author": "Kanish Khetarpal",
   "license": "MIT",
   "private": true,
+  "bin": {
+    "arch-lens": "dist/cli/main-cli.js"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
