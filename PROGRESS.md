@@ -75,8 +75,15 @@ Checked items are done; the rest are up next, in order.
 - [x] test(api): e2e tests
 - [x] docs: usage examples + API reference in README
 
-## Phase 9+ — Polish
+## Phase 9 — Polish
 
-Repeat/extend once Phase 8 is done: result caching, GitHub Action wrapper,
-sample gallery, docs site, multi-language parsing (Python/Go), Docker image,
-CI workflow, CONTRIBUTING + issue templates.
+- [x] feat(jobs): cache analysis results by repo source, with TTL + bypass
+- [x] chore: Dockerfile + .dockerignore for containerized runs
+- [x] ci: GitHub Actions workflow (lint, unit + e2e tests, build)
+- [x] docs: CONTRIBUTING.md + issue templates
+- [x] chore: add LICENSE (MIT)
+
+## Phase 10+ — Further polish
+
+Not yet started: GitHub Action wrapper, sample gallery, docs site,
+multi-language parsing (Python/Go).
