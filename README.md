@@ -149,3 +149,12 @@ node dist/cli/main-cli.js analyze https://github.com/nestjs/nest --ref master
 npm test        # unit tests
 npm run test:e2e   # end-to-end tests
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the development workflow and
+project structure.
+
+## License
+
+[MIT](./LICENSE)
