@@ -98,10 +98,15 @@ curl -X POST http://localhost:3000/analyze \
 { "id": "9d0a9416-...", "status": "pending", "createdAt": "2026-08-29T14:30:19.254Z" }
 ```
 
+Repeat requests for the same local path or git `url`+`ref` are served from an
+in-memory cache (TTL set by `ANALYSIS_CACHE_TTL_SECONDS`, default 300s) and
+resolve immediately with `"status": "completed", "fromCache": true`. Set
+`"noCache": true` in the body to force a fresh run.
+
 ### `GET /analyze/:id`
 
 Returns the job's current status (`pending` | `running` | `completed` |
-`failed`), plus `completedAt` and `error` once it settles.
+`failed`), plus `completedAt`, `error`, and `fromCache` once it settles.
 
 ### `GET /diagram/:id?format=mermaid|html|json`
 

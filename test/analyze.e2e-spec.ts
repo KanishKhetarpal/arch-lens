@@ -112,5 +112,25 @@ describe('Analyze API (e2e)', () => {
       expect(response.body).toHaveProperty('hotspots');
       expect(typeof response.body.prompt).toBe('string');
     });
+
+    it('serves a repeat analysis of the same path from cache', async () => {
+      const create = await request(app.getHttpServer())
+        .post('/analyze')
+        .send({ type: 'local', path: FIXTURE_PATH })
+        .expect(201);
+
+      expect(create.body.status).toBe('completed');
+      expect(create.body.fromCache).toBe(true);
+    });
+
+    it('bypasses the cache when noCache is set', async () => {
+      const create = await request(app.getHttpServer())
+        .post('/analyze')
+        .send({ type: 'local', path: FIXTURE_PATH, noCache: true })
+        .expect(201);
+
+      expect(create.body.fromCache).toBeUndefined();
+      await pollUntilSettled(app, create.body.id);
+    });
   });
 });

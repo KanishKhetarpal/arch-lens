@@ -17,4 +17,8 @@ export class AppConfigService {
   get isProduction(): boolean {
     return this.nodeEnv === 'production';
   }
+
+  get analysisCacheTtlSeconds(): number {
+    return this.configService.get('analysisCacheTtlSeconds', { infer: true });
+  }
 }

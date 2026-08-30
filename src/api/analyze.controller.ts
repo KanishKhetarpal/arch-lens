@@ -24,6 +24,7 @@ interface JobStatusResponse {
   createdAt: string;
   completedAt?: string;
   error?: string;
+  fromCache?: boolean;
 }
 
 @Controller()
@@ -33,7 +34,7 @@ export class AnalyzeController {
   @Post('analyze')
   create(@Body() body: RepoSourceDto): JobStatusResponse {
     const source = this.parseSource(body);
-    const job = this.jobs.create(source);
+    const job = this.jobs.create(source, { skipCache: body.noCache === true });
     return this.toStatusResponse(job);
   }
 
@@ -104,6 +105,7 @@ export class AnalyzeController {
       createdAt: job.createdAt.toISOString(),
       completedAt: job.completedAt?.toISOString(),
       error: job.error,
+      fromCache: job.fromCache,
     };
   }
 }

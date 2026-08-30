@@ -16,4 +16,5 @@ export interface AnalysisJob {
   completedAt?: Date;
   result?: AnalysisResult;
   error?: string;
+  fromCache?: boolean;
 }

@@ -12,4 +12,6 @@ export class RepoSourceDto {
   path?: string;
   url?: string;
   ref?: string;
+  /** Bypass the cached result (if any) and force a fresh analysis run. */
+  noCache?: boolean;
 }
