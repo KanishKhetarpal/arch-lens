@@ -1,0 +1,33 @@
+name: 'arch-lens'
+description: >-
+  Generate an architecture diagram (Mermaid/HTML/D3 JSON) and a plain-English
+  explanation for a TypeScript/NestJS codebase.
+author: 'Kanish Khetarpal'
+branding:
+  icon: 'git-branch'
+  color: 'purple'
+
+inputs:
+  path:
+    description: 'Path to the repo to analyze, relative to the workspace.'
+    required: false
+    default: '.'
+  out-dir:
+    description: 'Directory (relative to the workspace) to write output files into.'
+    required: false
+    default: 'arch-lens-out'
+
+outputs:
+  module-count:
+    description: 'Number of modules discovered in the analyzed repo.'
+  cycle-count:
+    description: 'Number of dependency cycles found.'
+  out-dir:
+    description: 'Directory containing diagram.mmd, diagram.html, diagram.json, and explanation.md.'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile.action'
+  args:
+    - ${{ inputs.path }}
+    - ${{ inputs.out-dir }}
