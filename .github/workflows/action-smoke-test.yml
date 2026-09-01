@@ -1,0 +1,33 @@
+name: Action Smoke Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  self-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./
+        id: arch-lens
+        with:
+          path: .
+          out-dir: arch-lens-out
+
+      - name: Verify outputs
+        run: |
+          echo "modules: ${{ steps.arch-lens.outputs.module-count }}"
+          echo "cycles: ${{ steps.arch-lens.outputs.cycle-count }}"
+          test -f arch-lens-out/diagram.mmd
+          test -f arch-lens-out/diagram.html
+          test -f arch-lens-out/diagram.json
+          test -f arch-lens-out/explanation.md
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arch-lens-self-diagram
+          path: arch-lens-out
