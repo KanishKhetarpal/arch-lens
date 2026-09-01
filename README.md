@@ -143,6 +143,33 @@ node dist/cli/main-cli.js analyze ./my-repo --out ./my-repo-arch-lens
 node dist/cli/main-cli.js analyze https://github.com/nestjs/nest --ref master
 ```
 
+## GitHub Action
+
+Run arch-lens against a repo directly from a workflow — no server, no manual
+CLI install:
+
+```yaml
+- uses: actions/checkout@v4
+- uses: KanishKhetarpal/arch-lens@main
+  id: arch-lens
+  with:
+    path: .
+    out-dir: arch-lens-out
+
+- run: echo "found ${{ steps.arch-lens.outputs.cycle-count }} cycle(s)"
+
+- uses: actions/upload-artifact@v4
+  with:
+    name: architecture-diagram
+    path: ${{ steps.arch-lens.outputs.out-dir }}
+```
+
+The action builds and runs the CLI in a Docker container, analyzing `path`
+(default `.`, the checked-out repo) and writing `diagram.mmd`, `diagram.html`,
+`diagram.json`, and `explanation.md` into `out-dir`. It exposes `module-count`
+and `cycle-count` as step outputs so later steps can act on them — e.g. fail
+a check when a PR introduces a new dependency cycle.
+
 ## Testing
 
 ```bash
