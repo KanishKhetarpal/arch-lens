@@ -83,7 +83,14 @@ Checked items are done; the rest are up next, in order.
 - [x] docs: CONTRIBUTING.md + issue templates
 - [x] chore: add LICENSE (MIT)
 
-## Phase 10+ — Further polish
+## Phase 10 — GitHub Action
 
-Not yet started: GitHub Action wrapper, sample gallery, docs site,
-multi-language parsing (Python/Go).
+- [x] feat(action): Dockerfile.action + entrypoint.sh wrapping the CLI
+- [x] feat(action): action.yml (path/out-dir inputs, module/cycle-count outputs)
+- [x] ci: smoke-test workflow that runs the action against this repo itself
+- [x] docs: GitHub Action usage in README
+
+## Phase 11+ — Further polish
+
+Not yet started: sample gallery, docs site, multi-language parsing
+(Python/Go).
