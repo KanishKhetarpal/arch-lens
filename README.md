@@ -170,6 +170,20 @@ The action builds and runs the CLI in a Docker container, analyzing `path`
 and `cycle-count` as step outputs so later steps can act on them — e.g. fail
 a check when a PR introduces a new dependency cycle.
 
+## Sample gallery
+
+Want to see the output before pointing arch-lens at a real repo? Generate a
+static gallery from a couple of small bundled samples — one clean layered
+app, one with a deliberate `forwardRef` dependency cycle:
+
+```bash
+npm run build
+npm run gallery   # writes diagram.html/.mmd/.json + explanation.md per sample, plus index.html, into ./gallery-out
+```
+
+Open `gallery-out/index.html` in a browser. See
+[docs/gallery.md](./docs/gallery.md) for how it's built.
+
 ## Testing
 
 ```bash
