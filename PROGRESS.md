@@ -90,7 +90,14 @@ Checked items are done; the rest are up next, in order.
 - [x] ci: smoke-test workflow that runs the action against this repo itself
 - [x] docs: GitHub Action usage in README
 
-## Phase 11+ — Further polish
+## Phase 11 — Sample Gallery
 
-Not yet started: sample gallery, docs site, multi-language parsing
-(Python/Go).
+- [x] feat(gallery): curated sample repos (clean layered app + one with a deliberate dependency cycle)
+- [x] feat(gallery): static index page builder (pure, testable)
+- [x] feat(gallery): generator wiring samples through the analysis pipeline + `npm run gallery`
+- [x] test(gallery): index page builder tests
+- [x] docs: gallery module notes + README usage
+
+## Phase 12+ — Further polish
+
+Not yet started: docs site, multi-language parsing (Python/Go).
