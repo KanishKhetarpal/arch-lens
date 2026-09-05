@@ -4,6 +4,8 @@ coverage/
 *.log
 .env
 .env.local
+gallery-out/
+arch-lens-out/
 
 # Ingestion test fixtures intentionally contain node_modules/ and dist/
 # directories to exercise the enumerator's default ignore rules.
